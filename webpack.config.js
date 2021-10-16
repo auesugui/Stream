@@ -4,7 +4,7 @@ module.exports = {
   mode: process.env.NODE_ENV,
   entry: './client/index.js',
   output: {
-    path: path.resolve(__dirname, 'public'),
+    path: path.join(__dirname, 'public'),
     filename: 'bundle.js',
     publicPath: '/',
   },
@@ -25,7 +25,7 @@ module.exports = {
   },
   devServer: {
     static: {
-      directory: path.resolve(__dirname, 'public'),
+      directory: path.join(__dirname, 'public'),
       publicPath: '/',
     },
     compress: true,
@@ -44,6 +44,6 @@ module.exports = {
     },
   },
   resolve: {
-    extension: ['.js', '.jsx'],
+    extensions: ['.js', '.jsx'],
   },
 };
