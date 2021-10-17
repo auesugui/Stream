@@ -4,7 +4,7 @@ module.exports = {
   mode: process.env.NODE_ENV,
   entry: './client/index.js',
   output: {
-    path: path.resolve(__dirname, 'public'),
+    path: path.join(__dirname, 'public'),
     filename: 'bundle.js',
     publicPath: '/',
   },
@@ -17,15 +17,19 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
-        test: /\.s[ac]ss$/i,
+        test: /\.(css|scss)$/i,
         exclude: /node_modules/,
-        use: ['style-loader', 'css-loader', 'sass-loader'],
+        use: [
+          'style-loader', 
+          'css-loader', 
+          'sass-loader'
+        ],
       },
     ],
   },
   devServer: {
     static: {
-      directory: path.resolve(__dirname, 'public'),
+      directory: path.join(__dirname, 'public'),
       publicPath: '/',
     },
     compress: true,
