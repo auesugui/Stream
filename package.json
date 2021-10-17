@@ -30,7 +30,10 @@
     "concurrently": "^6.3.0",
     "cross-env": "^7.0.3",
     "css-loader": "^6.4.0",
+    "eslint": "^8.0.1",
+    "eslint-plugin-react": "^7.26.1",
     "html-webpack-plugin": "^5.4.0",
+    "sass": "^1.43.2",
     "sass-loader": "^12.2.0",
     "style-loader": "^3.3.0",
     "webpack": "^5.58.2",
@@ -39,7 +42,6 @@
   },
   "dependencies": {
     "cors": "^2.8.5",
-    "eslint": "^8.0.1",
     "express": "^4.17.1",
     "mongoose": "^6.0.11",
     "nodemon": "^2.0.13",
