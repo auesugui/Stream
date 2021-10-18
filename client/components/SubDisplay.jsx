@@ -8,9 +8,9 @@ const SubDisplay = props => {
   // axios get request on component mount -> for all subs that the user has [{sub1}, {sub2}...]
   // then take data received and pass as props to individual subs
   // using params to store the specific user to find
-  useEffect(() => {
-    axios.get('/users')
-  }, []);
+  // useEffect(() => {
+  //   axios.get('/user')
+  // }, []);
 
   return (
     <div>

@@ -16,6 +16,8 @@ app.get('/*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../public/index.html')); //path - server.js/public/index.html || resolve - public/index.html
 });
 
+app.use('/user', apiRouter);
+
 //global error handler
 app.use((err, req, res, next) => {
   const defaultErr = {

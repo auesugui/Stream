@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Sub = props => {
   // WHAT TO RENDER:
@@ -7,18 +7,18 @@ const Sub = props => {
   // renewal date
   // A button to cancel (aka delete for now)
 
-  const handleCancel = () => {
-    //axios delete request
-    setError(null);
-    axios.delete('/users', { data: payload })
-      .then(res =>
-        //delete
-      )
-      .catch(error => {
-        if (error.response.status === 401) setError(error.response.data.message);
-        else setError('Something went wrong. Please try again later.');
-      })
-  };
+  // const handleCancel = () => {
+    //axios delete request with useEffect hook
+    // setError(null);
+    // axios.delete('/user', { data: payload })
+    //   .then(res =>
+    //     //delete
+    //   )
+    //   .catch(error => {
+    //     if (error.response.status === 404) setError(error.response.data.message);
+    //     else setError('Something went wrong. Please try again later.');
+  //     })
+  // };
   
 
   return (
@@ -26,7 +26,7 @@ const Sub = props => {
       <div className='subName'>Subscription Name</div>
       <div className='monthlyFee'>Monthly Fee</div>
       <div className='subRenewal'>Renewal Date</div>
-      <button className="button" onClick={handleCancel}>Cancel</button>
+      {/* <button className="button" onClick={handleCancel}>Cancel</button> */}
     </div>
   );
 };
