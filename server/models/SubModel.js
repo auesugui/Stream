@@ -13,16 +13,31 @@ mongoose
   .then(() => console.log('Connected to the Mongo database!'))
   .catch((error) => console.log(`Error connecting to database, ${error}`));
 
+//make our code look cleaner
+const reqString = {
+  type: String,
+  required: true,
+};
+
+//create another schema that'll go into our subscription key.
+const subSchema = new Schema({
+  name: reqString,
+  cost: { type: Number },
+  startDate: { type: Date, default: Date.now, required: true },
+});
+
 // sets a schema for the 'species' collection
 const userSchema = new Schema({
   firstName: {
     type: String,
     required: [true, 'Where is the name'],
-    min: [4, 'Too short. Please have at least four characters'],
+    min: [1, 'Too short. Please have at least one character'],
   },
-  lastName: { type: String, required: true },
-  password: { type: String, required: true },
-  email: { type: String, required: true },
+  lastName: reqString,
+  //The select false results in no password being returned in a get request.
+  password: { type: String, required: true, select: false },
+  email: { type: String, unique: true },
+  subs: [subSchema],
   // subscriptions: {
   //   //There could be multiple subscriptions. Using a One-to-many relationship pattern
   //   subcriptionTo: { type: String },

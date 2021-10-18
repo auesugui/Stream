@@ -12,11 +12,20 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.resolve(__dirname, '../public'))); //GET A BETTER EXPLANATION ON WHAT EXPRESS.STATIC DOES.
 
 //get request for linking our html and css
-app.get('/*', (req, res) => {
+
+//***if we input the asterisk on this get request, the request stops on line 19, and does not proceed to line 21***
+app.get('/', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../public/index.html')); //path - server.js/public/index.html || resolve - public/index.html
 });
 
-app.use('/user', apiRouter);
+//incoming request to signup(CREATE)
+app.use('/signup', apiRouter);
+
+//incoming request to login(READ)
+app.use('/login', apiRouter);
+
+app.use('/dashboard', apiRouter);
+//Dashboard router (READ)
 
 //global error handler
 app.use((err, req, res, next) => {
