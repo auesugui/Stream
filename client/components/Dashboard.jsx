@@ -7,8 +7,9 @@ import SubDisplay from './SubDisplay';
 // as well as a subscription component that displays indvidiual subscriptions
 const Dashboard = props => {
   return (
-    <div>
-      <div>
+    <div className='container'>
+      <div className='outerBox'>
+        <h1 id='header'>SUBr</h1>
         <Overview />
       </div>
       <div>
