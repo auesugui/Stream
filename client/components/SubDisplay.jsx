@@ -5,26 +5,32 @@ import Sub from './Sub';
 
 const SubDisplay = props => {
 
-  // axios get request on component mount -> for all subs that the user has [{sub1}, {sub2}...]
-  // then take data received and pass as props to individual subs
-  // using params to store the specific user to find
-  // useEffect(() => {
-  //   axios.get('/user')
-  // }, []);
+  useEffect(() => {
+    console.log('props.state: ', props.state);
+  }, []);
+
+
+  const subs = props.state.subs.map(sub => {
+    // const newSub = {...sub}
+    // eslint-disable-next-line react/jsx-key
+    return (<Sub id={sub.id} name={sub.name} cost={sub.cost} renewal={sub.renewal}/>);
+  });
+
 
   return (
-    <div>
-      <h1>SubDisplay</h1>
-      <div>
+    <div className="outerBox" >
+      <h2>Your Subscriptions</h2>
+      <br />
+      <hr className="solid" />
+      <br />
+      <div> 
         <SubCreator />
       </div>
-      <div>
-        {/* going to need functionality in making each sub, best way is to set attributes from data fetch */}
-        <Sub/>
+      <div className="displayBox">
+        {subs}
       </div>
     </div>
   );
 };
-
 
 export default SubDisplay;
