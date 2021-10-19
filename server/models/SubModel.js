@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
-const MONGO_URI =
-  'mongodb+srv://kennylee:123@cluster0.by4hv.mongodb.net/Cluster0?retryWrites=true&w=majority';
+const MONGO_URI = 'yourURIHere.com';
 
 mongoose
   .connect(MONGO_URI, {
