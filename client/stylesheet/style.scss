@@ -6,6 +6,8 @@ $text: rgb(5, 70, 92);
 $header: #023342;
 $whitetext: white;
 
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons+Outlined');
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -291,4 +293,17 @@ button.signup-btn {
 button.signup-btn:hover {
   cursor: pointer;
   color: #32cd32;
+}
+
+.subButtonContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+
+  button {
+    font-family: 'Material Icons Outlined';
+    font-size: 20px;
+    margin-left: 5px;
+    border: none;
+  }
 }
