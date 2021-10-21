@@ -21,7 +21,7 @@ const SubCreator = props => {
     axios.post(`/api/subscriptions/${props.state._id}`, newSubInfo)
       .then(res => {
         // console.log('POST user response: ', res);
-        // props.setState({ needsRefresh: true });
+        props.setState({...props.state, needsRefresh: true});
       })
       .catch(err => {
         console.log('ERROR: ', err);
@@ -49,7 +49,7 @@ const SubCreator = props => {
                   <input type='date' id='renewalDate' placeholder='Renewal Date' onChange={updateInput} />
                 </div>
                 <div style={{marginTop: 10}}>
-                  <input type='submit' className='submit' id='submit-sub' value='Add' onClick={() => {setTogglePopup(false); handleAddSub()}}></input>
+                  <input type='submit' className='submit' id='submit-sub' value='Add' onClick={() => {setTogglePopup(false); handleAddSub();}}></input>
                 </div>
               </div>
             </h3>

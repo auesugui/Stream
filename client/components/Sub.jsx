@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Popup from './Popup';
 
-const Sub = ({ id, name, cost, renewalDate, userId, setState }) => {
+const Sub = ({ id, name, cost, renewalDate, state, setState }) => {
   // WHAT TO RENDER:
   // name from props
   // cost/month
@@ -27,10 +27,10 @@ const Sub = ({ id, name, cost, renewalDate, userId, setState }) => {
   const handleEdit = () => {
     // axios delete request with useEffect hook
     // setError(null);
-    axios.put(`/api/subscriptions/${userId}/${id}`, updatedSubInfo)
+    axios.put(`/api/subscriptions/${state._id}/${id}`, updatedSubInfo)
       .then(res => {
         console.log('Updated ', name);
-        // setState({needsRefresh: true});
+        setState({...state, needsRefresh: true});
       })
       .catch(error => {
         console.log(error);
@@ -42,10 +42,10 @@ const Sub = ({ id, name, cost, renewalDate, userId, setState }) => {
   const handleDelete = () => {
   // axios delete request with useEffect hook
     // setError(null);
-    axios.delete(`/api/subscriptions/${userId}/${id}`)
+    axios.delete(`/api/subscriptions/${state._id}/${id}`)
       .then(res => {
         console.log('Deleted ', name);
-        // setState({needsRefresh: true});
+        setState({...state, needsRefresh: true});
       })
       .catch(error => {
         console.log(error);
@@ -80,7 +80,7 @@ const Sub = ({ id, name, cost, renewalDate, userId, setState }) => {
                 <input type='date' id='renewalDate' value={renewalDate}  onChange={updatedSubInfo.updateInput} />
               </div>
               <div style={{marginTop: 10}}>
-                <input type='submit' className='submit' id='submit-sub' value='Save' onClick={() => {setTogglePopup(false); handleEdit()}}></input>
+                <input type='submit' className='submit' id='submit-sub' value='Save' onClick={() => {setTogglePopup(false); handleEdit();}}></input>
               </div>
             </div>
           </h3>
