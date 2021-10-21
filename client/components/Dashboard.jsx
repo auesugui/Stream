@@ -14,12 +14,12 @@ const Dashboard = props => {
   // will receive: userID, firstName, lastName, email, subs as an [{sub1}, {sub2}]
   // OVERVIEW -> subs, firstName, lastName
   // SubDisplay -> userID (for delete/update), subs 
-  const [state, setState] = useState({...props.location.state});
+  const [state, setState] = useState({...props.location.state, needsRefresh: true});
 
   const history = useHistory();
   // const isMounted = useRef(false);
 
-  useEffect(() => {
+  const getSubs = () => {
     axios.get(`/api/${state._id}`)
       .then(response => {
         // console.log('GET user response: ', response);
@@ -28,7 +28,19 @@ const Dashboard = props => {
       .catch(err => {
         console.log('ERROR: ', err);
       });
-  });
+  };
+  
+  // useEffect(() => {
+  //   getSubs();
+  // }, []);
+
+  useEffect(() => {
+    if (state.needsRefresh) {
+      console.log('refresh triggered');
+      getSubs();
+      state.needsRefresh = false;
+    }
+  }, [state.needsRefresh]);
 
   // BELOW: trying to get state/page to update ONLY for new data
 

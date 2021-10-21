@@ -16,7 +16,7 @@ const SubDisplay = props => {
   const subs = props.state.subs.map(sub => {
     // const newSub = {...sub}
     // eslint-disable-next-line react/jsx-key
-    return (<Sub id={sub._id} name={sub.name} cost={sub.cost} renewalDate={dateFixer(sub.renewalDate)} userId={props.state._id} setState={props.setState}/>);
+    return (<Sub id={sub._id} name={sub.name} cost={sub.cost} renewalDate={dateFixer(sub.renewalDate)} state={props.state} setState={props.setState}/>);
   });
 
   // console.log('SubDisplay Props: ', props);
