@@ -14,7 +14,7 @@ const Dashboard = props => {
   // will receive: userID, firstName, lastName, email, subs as an [{sub1}, {sub2}]
   // OVERVIEW -> subs, firstName, lastName
   // SubDisplay -> userID (for delete/update), subs 
-  const [state, setState] = useState({...props.location.state, needsRefresh: true});
+  const [state, setState] = useState({...props.location.state});
 
   const history = useHistory();
   // const isMounted = useRef(false);

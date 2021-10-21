@@ -43,9 +43,10 @@ const Sub = ({ id, name, cost, renewalDate, userId, setState }) => {
   // axios delete request with useEffect hook
     // setError(null);
     axios.delete(`/api/subscriptions/${userId}/${id}`)
-      .then(res =>
-        console.log('Deleted ', name)
-      )
+      .then(res => {
+        console.log('Deleted ', name);
+        // setState({needsRefresh: true});
+      })
       .catch(error => {
         console.log(error);
         // if (error.response.status === 404) setError(error.response.data.message);
