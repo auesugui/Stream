@@ -3,39 +3,45 @@ import axios from 'axios';
 // maybe pass in useHistory here to enable passing of props
 import { useHistory } from 'react-router-dom';
 
-
-
 const Login = props => {
   //create username and password hooks
   const email = useFormInput('');
   const password = useFormInput('');
   const [error, setError] = useState(null);
 
-
+  const history = useHistory();
 
   //handle button click of login form
-  // const handleLogin = () => {
-  //   setError(null);
-  //   axios.post('/login', { email: email.value, password: password.value })
-  //     .then(res =>
-  //       // later on add in SessionID/verification
-  //       props.history.push({
-  //         pathname: '/dashboard',
-  //         state: { userID: 'res._id' }
-  //       }))
-  //     .catch(error => {
-  //       if (error.response.status === 401) setError(error.response.data.message);
-  //       else setError('Something went wrong. Please try again later.');
-  //     });
-  // };
+  const handleLogin = () => {
+    setError(null);
+    axios.post('/api/login', { email: email.value, password: password.value })
+      .then(response => {
+        // later on add in SessionID/verification
+        // console.log(response);
+        if (response.data.error) {
+          alert(response.data.error);
+        }
+        else {
+          console.log(response.data);
+          props.history.push({
+            pathname: '/dashboard',
+            state: response.data.userData
+          });
+        }
+      })
+      .catch(error => {
+        // if (error.response.status === 401) setError(error.response.data.message); else 
+        setError('Something went wrong. Please try again later.');
+      });
+  };
 
   // test case
-  const handleLogin = () => {
-    props.history.push({
-      pathname: '/dashboard',
-      state: { userID: 'test'}
-    });
-  };
+  // const handleLogin = () => {
+  //   props.history.push({
+  //     pathname: '/dashboard',
+  //     state: { userID: 'test'}
+  //   });
+  // };
 
 
   // handles when button is clicked for signup, redirects to signup page
@@ -55,14 +61,14 @@ const Login = props => {
       </div>
       <div style={{marginTop: 10}}>
         <div className='login-field'>
-          <input type='text' id='password' {...password}
+          <input type='password' id='password' {...password}
             placeholder='Password'
             autoComplete='new-password' required/>
         </div>
       </div>
       <div> <br/>
         <input type='submit' className='submit' id='login' value='Login' onClick={handleLogin}></input>
-        <h3 type='text' className='register'> Don't have an account? <button className='signup-btn' onClick={handleSignup}>Signup</button></h3>
+        <h3 type='text' className='register'> Don&apos;t have an account? <button className='signup-btn' onClick={handleSignup}>Signup</button></h3>
       </div>
     </div>
   );

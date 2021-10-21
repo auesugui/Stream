@@ -1,28 +1,22 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
-const MONGO_URI = 'yourURIHere.com';
+const MONGO_URI = 'mongodb+srv://app:6gEiVR7Gn1QBFbJI@subscriptions.6jcgn.mongodb.net/subscription?retryWrites=true&w=majority';
 
 mongoose
   .connect(MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    dbName: 'Cluster0',
+    dbName: 'subscription',
   })
   .then(() => console.log('Connected to the Mongo database!'))
   .catch((error) => console.log(`Error connecting to database, ${error}`));
 
-//make our code look cleaner
-const reqString = {
-  type: String,
-  required: true,
-};
-
 //create another schema that'll go into our subscription key.
 const subSchema = new Schema({
-  name: reqString,
+  name: { type: String, required: true },
   cost: { type: Number },
-  startDate: { type: Date, default: Date.now, required: true },
+  renewalDate: { type: Date, required: true },
 });
 
 // sets a schema for the 'species' collection
@@ -32,9 +26,8 @@ const userSchema = new Schema({
     required: [true, 'Where is the name'],
     min: [1, 'Too short. Please have at least one character'],
   },
-  lastName: reqString,
   //The select false results in no password being returned in a get request.
-  password: { type: String, required: true, select: false },
+  password: { type: String, required: true },
   email: { type: String, unique: true },
   subs: [subSchema],
   // subscriptions: {

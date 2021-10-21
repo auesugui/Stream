@@ -2,7 +2,11 @@ const path = require('path');
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
+
 const apiRouter = require('./routes/api');
+const signupRouter = require('./routes/signup');
+const loginRouter = require('./routes/login');
+const subscriptionsRouter = require('./routes/subscriptions');
 
 //requiring routers
 app.use(express.json());
@@ -18,13 +22,17 @@ app.get('/', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../public/index.html')); //path - server.js/public/index.html || resolve - public/index.html
 });
 
+app.use('/api/subscriptions', subscriptionsRouter);
+app.use('/api/login', loginRouter);
+app.use('/api/signup', signupRouter);
+app.use('/api', apiRouter);
+
 //incoming request to signup(CREATE)
-app.use('/signup', apiRouter);
 
 //incoming request to login(READ)
-app.use('/login', apiRouter);
+// app.use('/login', apiRouter);
 
-app.use('/dashboard', apiRouter);
+// app.use('/dashboard', apiRouter);
 //Dashboard router (READ)
 
 //global error handler
@@ -40,9 +48,9 @@ app.use((err, req, res, next) => {
 });
 
 //listening to port
-module.exports = app.listen(port, () =>
+app.listen(port, () =>
   console.log(`Listening on port ${port}`)
 );
 
 //is this to have our front end talk to our back end?
-// module.exports = app;
+module.exports = app;
