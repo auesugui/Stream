@@ -25,7 +25,7 @@ const Signup = props => {
     e.preventDefault();
     if (newUser.password === newUser.password2) {
       // console.log('Passwords match!');
-      axios.post('/api', {
+      axios.post('/api/signup', {
         firstName: newUser.firstName,
         email: newUser.email,
         password: newUser.password
@@ -35,11 +35,11 @@ const Signup = props => {
         }
       })
         .then(response => {
-          // console.log(response);
-          history.push({
-            pathname: '/dashboard',
-            state: response.body
-          });
+          console.log(response);
+          props.history.push({
+						pathname: '/dashboard',
+						state: response.data.userData,
+					});
         })
         .catch(error => console.log(error));
     } else {

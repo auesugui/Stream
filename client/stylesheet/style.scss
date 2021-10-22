@@ -37,6 +37,10 @@ h4 {
 	color: $header;
 }
 
+.expiringSoon {
+	color: red;
+}
+
 .logo {
 	text-align: center;
 }
@@ -63,6 +67,10 @@ h4 {
 	background-color: $primary;
 }
 
+.welcomeBack, .overviewTitle {
+	padding: 10px;
+}
+
 .innerbox {
 	padding: 10px;
 	width: 95%;
@@ -75,15 +83,18 @@ h4 {
 
 .displayBox {
 	display: flex;
-	justify-content: center;
+	justify-content: flex-start;
+	flex-wrap: wrap;
 	width: 100%;
 	overflow: auto;
 	padding-top: 10px;
 	border-radius: 10px;
+	padding-left: 6.5%;
+	padding-right: 5%;
 }
 
 .subBox {
-	padding: 5px;
+	//padding: 5px;
 	width: 30%;
 	float: left;
 	margin: 5px 5px 13px 10px;
@@ -94,7 +105,18 @@ h4 {
 	text-align: center;
 	background-color: #fff;
 }
+
+.subName {
+	font-size: 1.5em
+}
+
 /**Login Fields**/
+
+span.errorMessage {
+	color: darkred;
+	font-size: 0.7em;
+	margin-left: 10px;
+}
 
 div.wrap {
 	background-color: #fff;
@@ -208,7 +230,7 @@ button.logout-btn {
 	border: 1px solid;
 	border-radius: 2px;
 	margin: 0 auto;
-	width: 3.7em;
+	// width: 3.7em;
 	float: right;
 	cursor: pointer;
 	border: none;
@@ -216,6 +238,12 @@ button.logout-btn {
 	-webkit-transition: all 0.2s ease-in-out;
 	-moz-transition: all 0.2s ease-in-out;
 	transition: all 0.2s ease-in-out;
+
+	padding: 1px 5px;
+
+	span {
+		font-family: 'Material Icons Outlined';
+	}
 }
 
 button.logout-btn:hover {
@@ -321,6 +349,7 @@ button.signup-btn:hover {
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-end;
+	margin-bottom: 5px;
 
 	img {
 		justify-self: center;
@@ -331,5 +360,6 @@ button.signup-btn:hover {
 		font-size: 20px;
 		margin-left: 5px;
 		border: none;
+		background-color: transparent;
 	}
 }

@@ -13,7 +13,7 @@ router.post('/', userController.createUser, (req, res) => {
 //grabbing user_id information specifically
 //Figure out how to grab unique ids in the get request. <==
 router.get('/:id', userController.returnUserInfo, (req, res) => {
-  console.log('res.locals.users:', res.locals.users);
+  // console.log('res.locals.users:', res.locals.users);
   res.status(200).json(res.locals.users);
 });
 

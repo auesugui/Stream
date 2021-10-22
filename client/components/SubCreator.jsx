@@ -32,8 +32,8 @@ const SubCreator = props => {
   
   return (
     <div>
-      <h3>Create New Subscription
-        <input style={{marginTop: 10}} type='button' className='addSub' id='addSub' value='Add Sub' onClick={setTogglePopup}/>
+      <h3>
+        <input style={{marginTop: 10}} type='button' className='addSub' id='addSub' value='Add' onClick={setTogglePopup}/>
         <main>
           <Popup trigger={togglePopup} setTrigger={setTogglePopup}>
             <h3>
@@ -46,7 +46,7 @@ const SubCreator = props => {
                   <span><input className='sub-cost' id='cost' type='number' placeholder='Subscription Cost' onChange={updateInput} /> /month</span>
                 </div>
                 <div style={{marginTop: 10}}>
-                  <input type='date' id='renewalDate' placeholder='Renewal Date' onChange={updateInput} />
+                <span> Signup Date/Last Billing Date<input type='date' id='renewalDate' onChange={updateInput} /></span>
                 </div>
                 <div style={{marginTop: 10}}>
                   <input type='submit' className='submit' id='submit-sub' value='Add' onClick={() => {setTogglePopup(false); handleAddSub();}}></input>

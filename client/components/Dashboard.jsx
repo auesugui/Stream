@@ -34,6 +34,11 @@ const Dashboard = (props) => {
 			});
 	};
 
+	const handleLogout = (e) => {
+		e.preventDefault();
+		history.push('/');
+	}
+
 	// useEffect(() => {
 	//   getSubs();
 	// }, []);
@@ -77,7 +82,7 @@ const Dashboard = (props) => {
 			</h1>
 
 			<div className='outerBox'>
-				<button className='logout-btn'>Logout</button>
+				<button className='logout-btn' onClick={handleLogout}>Logout <span>logout</span></button>
 				<Overview state={state} />
 			</div>
 			<br />

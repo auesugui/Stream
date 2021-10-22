@@ -5,14 +5,13 @@ subscriptionController.createUser = (req, res, next) => {
   console.log('IM IN CREATEUSER');
   User.create(req.body)
     .then((data) => {
-      res.locals.users = data;
-      console.log(res.locals.users._id.valueOf());
-      res.locals.userId = data._id.valueOf();
+      res.locals.userData = data;
+      // console.log(res.locals.users._id.valueOf());
       return next();
     })
     .catch((err) => {
-      console.log('Lol I broke');
-      console.log(err);
+      // console.log('Lol I broke');
+      // console.log(err);
       res.status(400); 
       return next(err);
     });
@@ -22,16 +21,16 @@ subscriptionController.createUser = (req, res, next) => {
 // request body: {email: '', password: ''}
 // response: {userId: _id}
 subscriptionController.verifyUser = (req, res, next) => {
-  console.log('im in verifyUser');
+  // console.log('im in verifyUser');
   
   User.find({ email: req.body.email })
     .then((data) => {
       // check if any matches for email
       if (!data.length) {
         return next( {
-          log: 'account not found',
-          status: 400,
-          message: { err: 'account not found' },
+          log: 'Account not found.',
+          status: 200,
+          message: { err: 'No account exists with that email address. Click below to sign up.' },
         });
       }
       
@@ -42,14 +41,14 @@ subscriptionController.verifyUser = (req, res, next) => {
       } 
       else {
         return next({
-          log: 'incorrect password',
-          status: 400,
-          message: { err: 'incorrect password' },
+          log: 'Incorrect password.',
+          status: 200,
+          message: { err: 'Incorrect password. Try again or click below to sign up.' },
         });
       }
     })
     .catch((err) => {
-      console.log('NOT WORKING');
+      // console.log('NOT WORKING');
       res.status(400);
       return next(err);
     });
@@ -57,18 +56,18 @@ subscriptionController.verifyUser = (req, res, next) => {
 
 // for dashboard
 subscriptionController.returnUserInfo = (req, res, next) => {
-  console.log('in returnUserInfo');
+  // console.log('in returnUserInfo');
 
   User.findById(req.params.id)
     .then((data) => {
-      console.log(data);
+      // console.log(data);
       res.locals.users = data;
 
       if (!data) {
         const errObject = {
           log: 'Error: error in returnUserInfo',
           status: 400,
-          message: { err: 'no user by this id' }
+          message: { err: 'No account exists with that email address.' }
         };
         return next(errObject);
       }
@@ -76,18 +75,18 @@ subscriptionController.returnUserInfo = (req, res, next) => {
       return next();
     })
     .catch((err) => {
-      console.log('NOT WORKING');
+      // console.log('NOT WORKING');
       const errObject = {
         log: 'Error: error in returnUserInfo',
         status: 400,
-        message: { err: 'error in returnUserInfo' }
+        message: { err: 'Error in returnUserInfo' }
       };
       return next(errObject);
     });
 };
 
 subscriptionController.addSubscription = (req, res, next) => {
-  console.log('im in addsub');
+  // console.log('im in addsub');
   // User.find({ _id: req.params.id }).then((data) => {
   // console.log(data[0].subs);
   // return next;\\
@@ -112,12 +111,12 @@ subscriptionController.addSubscription = (req, res, next) => {
   )
     .then((data) => {
       res.locals.users = data;
-      console.log(res.locals.users);
+      // console.log(res.locals.users);
       return next();
     })
     .catch((err) => {
-      console.log('NOT WORKING');
-      console.log(err);
+      // console.log('NOT WORKING');
+      // console.log(err);
       res.status(400);
       return next(err);
     });

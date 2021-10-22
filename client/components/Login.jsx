@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 // maybe pass in useHistory here to enable passing of props
 import { useHistory } from 'react-router-dom';
+import ErrorMessage from './ErrorMessage.jsx';
 
 const Login = (props) => {
 	//create username and password hooks
@@ -10,7 +11,7 @@ const Login = (props) => {
 	const [error, setError] = useState(null);
 
 	const history = useHistory();
-
+	
 	//handle button click of login form
 	const handleLogin = () => {
 		setError(null);
@@ -19,8 +20,9 @@ const Login = (props) => {
 			.then((response) => {
 				// later on add in SessionID/verification
 				// console.log(response);
-				if (response.data.error) {
-					alert(response.data.error);
+				console.log('Wrong password response: ', response);
+				if (response.data.err) {
+					setError(response.data.err);
 				} else {
 					console.log(response.data);
 					props.history.push({
@@ -31,20 +33,11 @@ const Login = (props) => {
 			})
 			.catch((error) => {
 				// if (error.response.status === 401) setError(error.response.data.message); else
+				console.log('Caught error in axios.catch')
 				setError('Something went wrong. Please try again later.');
 			});
-	};
-
-	// test case
-	// const handleLogin = () => {
-	//   props.history.push({
-	//     pathname: '/dashboard',
-	//     state: { userID: 'test'}
-	//   });
-	// };
-
-	// handles when button is clicked for signup, redirects to signup page
-
+		};
+		
 	const handleSignup = () => {
 		props.history.push('/signup');
 	};
@@ -78,6 +71,7 @@ const Login = (props) => {
 					/>
 				</div>
 			</div>
+			<ErrorMessage error={error} setError={setError} />
 			<div>
 				{' '}
 				<br />
@@ -112,5 +106,6 @@ const useFormInput = (initialValue) => {
 		onChange: handleChange,
 	};
 };
+
 
 export default Login;

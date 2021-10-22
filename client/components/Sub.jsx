@@ -9,6 +9,13 @@ const Sub = ({ id, name, cost, renewalDate, state, setState }) => {
 	// renewal date
 	// A button to cancel (aka delete for now)
 
+	const today = Date.now();
+	const renewalDay = new Date(renewalDate).getDate();
+	const renewalThisMonth = new Date(today).setDate(renewalDay);
+	const nextRenewalDate = today < renewalThisMonth ? renewalThisMonth : new Date(renewalThisMonth).setMonth(new Date(renewalThisMonth).getMonth() + 1);
+	const oneDay = 1000 * 60 * 60 * 24;
+	const daysUntilNext = Math.floor((nextRenewalDate - today) / oneDay);
+
 	const [togglePopup, setTogglePopup] = useState(false);
 	const [updatedSubInfo, setUpdatedSubInfo] = useState({
 		name: name,
@@ -61,7 +68,7 @@ const Sub = ({ id, name, cost, renewalDate, state, setState }) => {
 		const domainName = updatedSubInfo.name.toLowerCase().split(' ').join('');
 		const logoUrl =
 			'https://logo.clearbit.com/' + domainName + '.com' + '?size=65';
-		logo.push(<img className='subLogo' src={logoUrl} />);
+		logo.push(<img className='subLogo' src={logoUrl} onError="this.src='./assets/logoIcon.png'"/>);
 	}
 
 	return (
@@ -83,9 +90,11 @@ const Sub = ({ id, name, cost, renewalDate, state, setState }) => {
 				</button>
 			</div>
 			<div>{logo}</div>
-			<h4>{`Name: ${name}`}</h4>
-			<h4>{`Monthly Fee: $${cost}`}</h4>
-			<h4>{`Renewal Date: ${new Date(renewalDate).toLocaleDateString()}`}</h4>
+			<h4 className='subName' >{name}</h4>
+			<h4>{`Monthly Cost: $${cost}`}</h4>
+			<h4>{`Renewal Date: ${new Date(nextRenewalDate).toLocaleDateString()} `}
+				<span className={daysUntilNext < 8 ? "expiringSoon" : ""}>{`(${daysUntilNext} days)`}</span>
+			</h4>
 			<main>
 				<Popup trigger={togglePopup} setTrigger={setTogglePopup}>
 					<h3>
@@ -114,12 +123,15 @@ const Sub = ({ id, name, cost, renewalDate, state, setState }) => {
 								</span>
 							</div>
 							<div style={{ marginTop: 10 }}>
-								<input
-									type='date'
-									id='renewalDate'
-									value={renewalDate}
-									onChange={updatedSubInfo.updateInput}
-								/>
+								<span> Billing Date </span><br/><br/>
+								<span>
+									<input
+										type='date'
+										id='renewalDate'
+										value={updatedSubInfo.renewalDate}
+										onChange={updatedSubInfo.updateInput}
+									/>
+								</span>
 							</div>
 							<div style={{ marginTop: 10 }}>
 								<input

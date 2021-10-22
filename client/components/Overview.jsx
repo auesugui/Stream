@@ -10,8 +10,8 @@ const Overview = (props) => {
   return (
     <>
       <div>
-        <h2>Welcome back {props.state.firstName} {props.state.lastName}</h2> <hr className='solid'/>
-        <h3>Your Monthly Overview</h3> 
+        <h2 className='welcomeBack'>Welcome&#44; {props.state.firstName} {props.state.lastName}</h2> <hr className='solid'/>
+        <h3 className='overviewTitle'>Your Monthly Overview</h3> 
       </div>
       <div className="innerbox">
         <label><strong>Total Subscriptions: </strong></label>
